@@ -1,4 +1,4 @@
-import { renderScreenshotWithPuppeteer } from "@/app/lib/puppeteer";
+import { renderScreenshotWithScreenshotAPI } from "@/app/lib/api";
 import { unstable_noStore } from "next/cache";
 
 export async function POST(request: Request) {
@@ -6,7 +6,7 @@ export async function POST(request: Request) {
 
     const data = (await request.json()) as { url: string };
 
-    const screenshot = await renderScreenshotWithPuppeteer(data.url);
+    const screenshot = await renderScreenshotWithScreenshotAPI(data.url);
 
     return new Response(screenshot, {
         headers: { "content-type": "image/jpeg" },
